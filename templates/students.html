@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    .student-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #search {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+
+    .btn-custom {
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+    }
+
+    .add-btn {
+        background: #667eea;
+    }
+
+    .export-btn {
+        background: #28a745;
+    }
+
+    .student-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .student-table th {
+        background: #667eea;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .student-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .student-table tr:hover {
+        background: #f5f7ff;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .edit-btn {
+        background: orange;
+        color: white;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+
+    .delete-btn {
+        background: red;
+        color: white;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+</style>
+
+<!-- HEADER -->
+<div class="student-header">
+    <h2>🎓 Students</h2>
+
+    <div class="actions">
+        <input type="text" id="search" placeholder="🔍 Search">
+
+        <a href="/add_student/" class="btn-custom add-btn">
+            <i class="fa fa-plus"></i> Add
+        </a>
+
+        <a href="/export/" class="btn-custom export-btn">
+            ⬇ Export
+        </a>
+    </div>
+</div>
+
+<!-- TABLE -->
+<table class="student-table">
+
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Course</th>
+        <th>Department</th>
+        <th>Age</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.phone }}</td>
+        <td>{{ s.course }}</td>
+        <td>{{ s.department }}</td>
+        <td>{{ s.age }}</td>
+
+        <td>
+            <div class="action-buttons">
+                <a href="/edit/{{ s.id }}/" class="edit-btn">
+                    <i class="fa fa-edit"></i>
+                </a>
+
+                <a href="/delete/{{ s.id }}/" class="delete-btn"
+                   onclick="return confirm('Delete this student?');">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<!-- SEARCH SCRIPT -->
+<script>
+document.getElementById("search").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll(".student-table tr");
+
+    rows.forEach((row, index) => {
+        if(index === 0) return;
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+{% endblock %}

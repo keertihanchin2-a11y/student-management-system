@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-5">
+    <h2 style="text-align:center;">📊 Analytics Dashboard</h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:30px;">
+
+        <!-- BAR -->
+        <div style="background:white; padding:20px; border-radius:10px;">
+            <h4 style="text-align:center;">Students per Course</h4>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <!-- LINE -->
+        <div style="background:white; padding:20px; border-radius:10px;">
+            <h4 style="text-align:center;">Student Growth</h4>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const courseLabels = JSON.parse('{{ course_labels|escapejs }}');
+    const courseData = JSON.parse('{{ course_data|escapejs }}');
+    const growthLabels = JSON.parse('{{ growth_labels|escapejs }}');
+    const growthData = JSON.parse('{{ growth_data|escapejs }}');
+
+    // BAR CHART
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: courseLabels,
+            datasets: [{
+                label: 'Students per Course',
+                data: courseData,
+                backgroundColor: ['#4facfe','#43e97b','#fa709a','#a18cd1']
+            }]
+        }
+    });
+
+    // LINE CHART
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: growthLabels,
+            datasets: [{
+                label: 'Student Growth',
+                data: growthData,
+                borderColor: '#4facfe',
+                fill: false,
+                tension: 0.3
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

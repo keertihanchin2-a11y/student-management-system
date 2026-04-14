@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card p-4 shadow text-center" style="max-width:400px; margin:auto;">
+        
+        <h3>👤 Admin Profile</h3>
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+             width="100" class="mb-3">
+
+        <h4>Admin</h4>
+        <p>Email: {{ user.username }}@gmail.com</p>
+
+        <hr>
+
+        <a href="/dashboard/" class="btn btn-primary w-100">
+            ⬅ Back to Dashboard
+        </a>
+    </div>
+</div>
+
+{% endblock %}

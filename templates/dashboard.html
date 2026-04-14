@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* 🌈 BACKGROUND (OPTION 2 - SOFT COLORFUL) */
+    body {
+        background: linear-gradient(135deg, #e0f7fa, #e1bee7, #fce4ec);
+        min-height: 100vh;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    .dashboard-header p {
+        color: #4a5568;
+        font-size: 15px;
+    }
+
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 10px;
+    }
+
+    /* 💎 GLASS EFFECT CARDS */
+    .dash-card {
+        padding: 25px;
+        border-radius: 18px;
+        color: #2d3748;
+        position: relative;
+        transition: 0.3s;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        cursor: pointer;
+    }
+
+    .dash-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+
+    .dash-card i {
+        font-size: 40px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        opacity: 0.3;
+    }
+
+    .dash-card h2 {
+        font-size: 34px;
+        margin: 10px 0;
+        font-weight: bold;
+    }
+
+    .dash-card p {
+        margin: 0;
+        font-size: 15px;
+    }
+
+    /* 🎨 FULL COLORED DASHBOARD BOXES */
+
+.blue {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.green {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    color: #064e3b;
+}
+
+.orange {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    color: #7c2d12;
+}
+
+.purple {
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    color: #4c1d95;
+}
+    /* 🔥 QUICK ACTION BUTTONS (COLORED) */
+    .quick-actions {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .quick-actions a {
+        text-decoration: none;
+        padding: 12px 18px;
+        margin: 8px;
+        border-radius: 12px;
+        color: white;
+        display: inline-block;
+        transition: 0.3s;
+        font-weight: 500;
+    }
+
+    /* 🎯 INDIVIDUAL BUTTON COLORS */
+    .quick-actions a:nth-child(1) {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .quick-actions a:nth-child(2) {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+    }
+
+    .quick-actions a:nth-child(3) {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .quick-actions a:nth-child(4) {
+        background: linear-gradient(135deg, #f6d365, #fda085);
+    }
+
+    .quick-actions a:nth-child(5) {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    }
+
+    .quick-actions a:nth-child(6) {
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    }
+
+    .quick-actions a:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+</style>
+
+<div class="dashboard-header">
+    <h1>📊 Admin Dashboard</h1>
+    <p>Welcome to Student Management System</p>
+</div>
+
+<div class="dashboard-cards">
+
+    <!-- Total Students -->
+    <a href="/students/" style="text-decoration:none;">
+        <div class="dash-card blue">
+            <i class="fa fa-user-graduate"></i>
+            <h2>{{ total_students }}</h2>
+            <p>Total Students</p>
+        </div>
+    </a>
+
+    <!-- Courses -->
+    <div class="dash-card green">
+        <i class="fa fa-book"></i>
+        <h2>{{ total_courses|default:"0" }}</h2>
+        <p>Courses</p>
+    </div>
+
+    <!-- Departments -->
+    <div class="dash-card orange">
+        <i class="fa fa-building"></i>
+        <h2>{{ total_departments|default:"0" }}</h2>
+        <p>Departments</p>
+    </div>
+
+    <!-- Academic Year -->
+    <div class="dash-card purple">
+        <i class="fa fa-calendar"></i>
+        <h2>{{ year|default:"2026" }}</h2>
+        <p>Academic Year</p>
+    </div>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="quick-actions">
+    <a href="/add_student/">➕ Add Student</a>
+    <a href="/students/">📋 View Students</a>
+    <a href="/analytics/">📊 Analytics</a>
+    <a href="/export/">⬇ Export</a>
+    <a href="/profile/">👤 Profile</a>
+    <a href="/logout/">🚪 Logout</a>
+</div>
+
+{% endblock %}
