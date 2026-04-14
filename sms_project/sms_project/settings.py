@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a2&6=hltx+97hhys7&w7%2+mw6bn^uc4+y@lm+v+kpmsn^c0a2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'sms_project.urls'
+ROOT_URLCONF = 'sms_project.sms_project.urls'
 
 TEMPLATES = [
     {
@@ -67,8 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sms_project.wsgi.application'
-
+WSGI_APPLICATION = 'sms_project.sms_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -119,5 +118,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    BASE_DIR / 'static'
 ]
